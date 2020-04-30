@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>
+      Obfuscation Playground
+    </title>
+    <meta name="description" content="An easily auditable web application for generating cryptographic hashes and obfuscating small amounts of data." />
+  </head>
+  <body>
+
+    <div align="center" id="noscript" style="display: flex; margin: 1em; height: 3em; background-color: red">
+      <b style="margin-top: 1em; margin-left: 4em; color: white;">
+        JavaScript is disabled? To play in this
+        playground, JavaScript needs to be enabled.
+      </b>
+    </div>
+
+    <script type="text/javascript">
+      document.getElementById('noscript').style.display = 'none';
+    </script>
+
+    <script src="wasm_plugins.js"></script>
+
+    <p style="margin: 2em;">
+      <form name="obpg_form" action="">
+        <input name="inputformat" value="base64"
+               type="radio">Base-64
+        <input name="inputformat" value="hex"
+               type="radio">Hex
+        <input name="inputformat" value="string"
+               checked="checked" type="radio">String
+        <br/>
+
+        <textarea name="the_data" id="the_input_data" cols="60" rows="10"
+                  style="font-family: Courier, monospace">
+        </textarea>
+    </p>
+
+    <p style="margin-top: 2em; margin-bottom: 2em;">
+      <select name="action_menu" id="action">
+        <option value="copy">Reformat only</option>
+        <optgroup name="Hashes (Old)">
+          <option value="md5">MD5 hash</option>
+          <option value="ripemd-160">RIPEMD-160 hash</option>
+          <option value="sha-1">SHA-1 hash</option>
+        </optgroup>
+        <optgroup name="Hashes (SHA-2)">
+          <option value="sha-224">SHA-224 hash</option>
+          <option value="sha-256">SHA-256 hash</option>
+          <option value="sha-384">SHA-384 hash</option>
+          <option value="sha-512">SHA-512 hash</option>
+        </optgroup>
+        <optgroup name="Hashes (SHA-3)">
+          <option value="sha3-224">SHA3-224 hash</option>
+          <option value="sha3-256">SHA3-256 hash</option>
+          <option value="sha3-384">SHA3-384 hash</option>
+          <option value="sha3-512">SHA3-512 hash</option>
+        </optgroup>
+        <optgroup name="Obfuscation">
+          <option value="obfus-0">Obfuscation 0</option>
+          <option value="obfus-1">Obfuscation 1</option>
+          <option value="obfus-2">Obfuscation 2</option>
+        </optgroup>
+      </select>
+
+      <input value=" -> " onclick="javascript:forward();" type="button">
+      <input value=" <- " onclick="javascript:backward();" type="button">
+      <input value=" ⇅ " onclick="javascript:doSwitch();" type="button" style="margin-left: 2em;">
+      <input value=" Clear " onclick="javascript:doClear();" type="button">
+      <input value=" Parms " onclick="javascript:setParameter();" type="button" style="margin-left: 2em;">
+    </p>
+
+    <p>
+      <input name="outputformat" value="base64" type="radio" onclick="javascript:redisplayOutput();">Base-64
+      <input name="outputformat" value="hex" type="radio" onclick="javascript:redisplayOutput();">Hex
+      <input name="outputformat" value="string" checked="checked" type="radio" onclick="javascript:redisplayOutput();">String
+      <input value=" Linebreak Output " onclick="javascript:doBreakLines();" type="button">
+      <br/>
+
+      <textarea name="the_output" id="the_output_data" cols="60" rows="10"
+                style="font-family: Courier, monospace">
+      </textarea>
+    </p>
+
+    </form>
+
+    <script src="obfuscation_playground.js"></script>
+
+  </body>
+</html>
