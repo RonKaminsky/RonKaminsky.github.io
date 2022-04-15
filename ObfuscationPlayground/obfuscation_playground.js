@@ -255,6 +255,7 @@ function setParameter () { // eslint-disable-line no-unused-vars
 
 function redisplayOutput () {
   var output = document.obpg_form.the_output;
+  output.style.backgroundColor = "white";
   if (outputSlice === null) {
     output.value = '';
   } else if (document.obpg_form.outputformat[0].checked) {
@@ -269,8 +270,12 @@ function redisplayOutput () {
       output.select();
     } catch (e) {
       output.value = '';
-      window.alert(e);
       console.error(e);
+      if (e == "URIError: malformed URI sequence") {
+        output.style.backgroundColor = "#FF4040";
+      } else {
+        window.alert(e);
+      }
     }
   }
 }
